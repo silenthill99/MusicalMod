@@ -1,0 +1,106 @@
+{
+  "stylo": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-stylo",
+        "stream": true
+      }
+    ]
+  },
+  "feel-good-inc": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-feel-good-inc",
+        "stream": true
+      }
+    ]
+  },
+  "dare": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-dare",
+        "stream": true
+      }
+    ]
+  },
+  "clint-eastwood": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-clint-eastwood",
+        "stream": true
+      }
+    ]
+  },
+  "on-melancholy-hill": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-on-melancholy-hill",
+        "stream": true
+      }
+    ]
+  },
+  "good-4-u": {
+    "sounds": [
+      {
+        "name": "musical_mod:olivia-rodrigo-good-4-u",
+        "stream": true
+      }
+    ]
+  },
+  "l-amour-nous-guidera": {
+    "sounds": [
+      {
+        "name": "musical_mod:le-roi-lion-2-l-amour-nous-guidera",
+        "stream": true
+      }
+    ]
+  },
+  "dirty-harry": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-dirty-harry",
+        "stream": true
+      }
+    ]
+  },
+  "ya-pas-que-les-grands-qui-revent": {
+    "sounds": [
+      {
+        "name": "musical_mod:melody-ya-pas-que-les-grands-qui-revent",
+        "stream": true
+      }
+    ]
+  },
+  "lose-yourself": {
+    "sounds": [
+      {
+        "name": "musical_mod:eminem-lose-yourself",
+        "stream": true
+      }
+    ]
+  },
+  "chut": {
+    "sounds": [
+      {
+        "name": "musical_mod:julia-chut",
+        "stream": true
+      }
+    ]
+  },
+  "sous-les-apparences": {
+    "sounds": [
+      {
+        "name": "musical_mod:encanto-sous-les-apparences",
+        "stream": true
+      }
+    ]
+  },
+  "19-2000": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-19-2000",
+        "stream": true
+      }
+    ]
+  }
+}

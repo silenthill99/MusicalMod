@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "musical_mod:block/2d"
+    },
+    "facing=south": {
+      "model": "musical_mod:block/2d",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "musical_mod:block/2d",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "musical_mod:block/2d",
+      "y": 270
+    }
+  }
+}

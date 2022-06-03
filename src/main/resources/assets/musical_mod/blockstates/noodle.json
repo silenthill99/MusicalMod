@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "musical_mod:block/noodle"
+    },
+    "facing=south": {
+      "model": "musical_mod:block/noodle",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "musical_mod:block/noodle",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "musical_mod:block/noodle",
+      "y": 270
+    }
+  }
+}
