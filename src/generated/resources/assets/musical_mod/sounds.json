@@ -1,0 +1,10 @@
+{
+  "stylo": {
+    "sounds": [
+      {
+        "name": "musical_mod:gorillaz-stylo",
+        "stream": true
+      }
+    ]
+  }
+}

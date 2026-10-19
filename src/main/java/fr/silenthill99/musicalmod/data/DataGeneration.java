@@ -3,6 +3,7 @@ package fr.silenthill99.musicalmod.data;
 import fr.silenthill99.musicalmod.Main;
 import fr.silenthill99.musicalmod.data.models.ModelGenerator;
 import fr.silenthill99.musicalmod.data.registries.ModJukeboxSong;
+import fr.silenthill99.musicalmod.data.sounds.SoundDefinitionsGenerator;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -19,6 +20,7 @@ public class DataGeneration {
         PackOutput packOutput = generator.getPackOutput();
 
         generator.addProvider(true, new ModelGenerator(packOutput));
+        generator.addProvider(true, new SoundDefinitionsGenerator(packOutput));
 
         event.createDatapackRegistryObjects(new RegistrySetBuilder()
                 .add(Registries.JUKEBOX_SONG, ModJukeboxSong::bootstrap));
