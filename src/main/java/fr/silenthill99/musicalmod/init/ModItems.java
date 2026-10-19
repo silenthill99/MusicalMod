@@ -1,34 +1,33 @@
 package fr.silenthill99.musicalmod.init;
 
 import fr.silenthill99.musicalmod.Main;
-import fr.silenthill99.musicalmod.utils.ModItemGroups;
-import fr.silenthill99.musicalmod.utils.ModSoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.MusicDiscItem;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
+import fr.silenthill99.musicalmod.data.registries.ModJukeboxSong;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Main.MOD_ID);
+    public static final DeferredRegister.Items ITEMS = net.neoforged.neoforge.registries.DeferredRegister.createItems(Main.MOD_ID);
 
-    public static final RegistryObject<Item> STYLO = ITEMS.register("stylo", () -> new MusicDiscItem(1, ModSoundEvents.stylo, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> FEEL_GOOD_INC = ITEMS.register("feel_good_inc", () -> new MusicDiscItem(1, ModSoundEvents.feel_good_inc, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> DARE = ITEMS.register("dare", () -> new MusicDiscItem(1, ModSoundEvents.dare, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> CLINT_EASTWOOD = ITEMS.register("clint-eastwood", () -> new MusicDiscItem(1, ModSoundEvents.clint_eastwood, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> ON_MELANCHOLY_HILL = ITEMS.register("on_melancholy_hill", () -> new MusicDiscItem(1, ModSoundEvents.on_melancholy_hill, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> GOOD_4_U = ITEMS.register("good-4-u", () -> new MusicDiscItem(1, ModSoundEvents.good_4_u, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> L_AMOUR_NOUS_GUIDERA = ITEMS.register("l-amour-nous-guidera", () -> new MusicDiscItem(1, ModSoundEvents.l_amour_nous_guidera, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> DIRTY_HARRY = ITEMS.register("dirty-harry", () -> new MusicDiscItem(1, ModSoundEvents.dirty_harry, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> YA_PAS_QUE_LES_GRANDS_QUI_REVENT = ITEMS.register("ya_pas_que_les_grands_qui_revent", () -> new MusicDiscItem(1, ModSoundEvents.ya_pas_que_les_grands_qui_revent, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
-    public static final RegistryObject<Item> LOSE_YOURSELF = ITEMS.register("lose-yourself", () -> new MusicDiscItem(1, ModSoundEvents.lose_yourself, new Item.Properties().stacksTo(1).tab(ModItemGroups.MusicalMod)));
-    public static final RegistryObject<Item> CHUT = ITEMS.register("chut", () -> new MusicDiscItem(1, ModSoundEvents.chut, new Item.Properties().stacksTo(1).tab(ModItemGroups.MusicalMod)));
-    public static final RegistryObject<Item> SOUS_LES_APPARENCES = ITEMS.register("sous-les-apparences", () -> new MusicDiscItem(1, ModSoundEvents.sous_les_apparences, new Item.Properties().stacksTo(1).tab(ModItemGroups.MusicalMod)));
-    public static final RegistryObject<Item> DIXNEUF_DEUXMILLE = ITEMS.register("19-2000", () -> new MusicDiscItem(1, ModSoundEvents.dixneuf_deuxmille, new Item.Properties().tab(ModItemGroups.MusicalMod).stacksTo(1)));
+    public static final DeferredItem<Item> STYLO = ITEMS.registerItem("stylo", (properties) -> new Item(properties.jukeboxPlayable(ModJukeboxSong.STYLO).stacksTo(1)));
+    public static final DeferredItem<Item> FEEL_GOOD_INC = ITEMS.registerItem("feel_good_inc", (properties) -> new Item(properties.jukeboxPlayable(ModJukeboxSong.FEEL_GOOD_INC).stacksTo(1)));
+    public static final DeferredItem<Item> DARE = ITEMS.registerItem("dare", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.DARE).stacksTo(1)));
+    public static final DeferredItem<Item> CLINT_EASTWOOD = ITEMS.registerItem("clint-eastwood", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.CLINT_EASTWOOD).stacksTo(1)));
+    public static final DeferredItem<Item> ON_MELANCHOLY_HILL = ITEMS.registerItem("on_melancholy_hill", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.ON_MELANCHOLY_HILL).stacksTo(1)));
+    public static final DeferredItem<Item> GOOD_4_U = ITEMS.registerItem("good-4-u", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.GOOD_4_U).stacksTo(1)));
+    public static final DeferredItem<Item> L_AMOUR_NOUS_GUIDERA = ITEMS.registerItem("l-amour-nous-guidera", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.LAMOUR_NOUS_GUIDERA).stacksTo(1)));
+    public static final DeferredItem<Item> DIRTY_HARRY = ITEMS.registerItem("dirty-harry", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.DIRTY_HARRY).stacksTo(1)));
+    public static final DeferredItem<Item> YA_PAS_QUE_LES_GRANDS_QUI_REVENT = ITEMS.registerItem("ya_pas_que_les_grands_qui_revent", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.YA_PAS_QUE_LES_GRANDS_QUI_REVENT).stacksTo(1)));
+    public static final DeferredItem<Item> LOSE_YOURSELF = ITEMS.registerItem("lose-yourself", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.LOSE_YOURSELF).stacksTo(1)));
+    public static final DeferredItem<Item> CHUT = ITEMS.registerItem("chut", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.CHUT).stacksTo(1)));
+    public static final DeferredItem<Item> SOUS_LES_APPARENCES = ITEMS.registerItem("sous-les-apparences", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.SOUS_LES_APPARENCES).stacksTo(1)));
+    public static final DeferredItem<Item> DIXNEUF_DEUXMILLE = ITEMS.registerItem("19-2000", properties -> new Item(properties.jukeboxPlayable(ModJukeboxSong.DIXNEUF_DEUXMILLE).stacksTo(1)));
 
-    public static final RegistryObject<ForgeSpawnEggItem> NOODLE_SPAWN_EGG = ITEMS.register("noodle_spawn_egg", () -> new ForgeSpawnEggItem(EntityTypesInit.NOODLE, 0x990099, 0x0000FF, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
-    public static final RegistryObject<ForgeSpawnEggItem> MURDOC_SPAWN_EGG = ITEMS.register("murdoc_spawn_egg", () -> new ForgeSpawnEggItem(EntityTypesInit.MURDOC, 0x009900, 0x000000, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
-    public static final RegistryObject<ForgeSpawnEggItem> RUSSEL_SPAWN_EGG = ITEMS.register("russel_spawn_egg", () -> new ForgeSpawnEggItem(EntityTypesInit.RUSSEL, 0x663300, 0xffffff, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
-    public static final RegistryObject<ForgeSpawnEggItem> STUART_SPAWN_EGG = ITEMS.register("stuart_spawn_egg", () -> new ForgeSpawnEggItem(EntityTypesInit.STUART, 0xffffff, 0x3300ff, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
+    public static final DeferredItem<Item> CD = ITEMS.registerItem("cd", Item::new);
+
+//    public static final DeferredItem<SpawnEggItem> NOODLE_SPAWN_EGG = ITEMS.registerItem("noodle_spawn_egg", () -> new SpawnEggItem(EntityTypesInit.NOODLE, 0x990099, 0x0000FF, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
+//    public static final DeferredItem<SpawnEggItem> NOODLE_SPAWN_EGG = ITEMS.registerItem("noodle_spawn_egg", properties -> new SpawnEggItem(properties.spawnEgg(EntityTypesInit.NOODLE.get()).tab(ModItemGroups.GorillazGroup)));
+//    public static final DeferredItem<SpawnEggItem> MURDOC_SPAWN_EGG = ITEMS.registerItem("murdoc_spawn_egg", () -> new SpawnEggItem(EntityTypesInit.MURDOC, 0x009900, 0x000000, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
+//    public static final DeferredItem<ForgeSpawnEggItem> RUSSEL_SPAWN_EGG = ITEMS.registerItem("russel_spawn_egg", () -> new ForgeSpawnEggItem(EntityTypesInit.RUSSEL, 0x663300, 0xffffff, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
+//    public static final DeferredItem<ForgeSpawnEggItem> STUART_SPAWN_EGG = ITEMS.registerItem("stuart_spawn_egg", () -> new ForgeSpawnEggItem(EntityTypesInit.STUART, 0xffffff, 0x3300ff, new Item.Properties().tab(ModItemGroups.GorillazGroup)));
 }

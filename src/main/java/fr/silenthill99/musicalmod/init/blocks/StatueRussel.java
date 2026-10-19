@@ -1,29 +1,27 @@
 package fr.silenthill99.musicalmod.init.blocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
 @SuppressWarnings("ALL")
 public class StatueRussel extends Block {
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final VoxelShape SHAPE_N = Stream.of(
             Block.box(4, 23.5, 4, 12, 31.5, 12),
             Block.box(4, 11.5, 6, 12, 23.5, 10),
@@ -37,7 +35,7 @@ public class StatueRussel extends Block {
             Block.box(-0.5, 11, 5.5, 4.5, 24, 10.5),
             Block.box(7.5, -1, 5.5, 12.5, 12, 10.5),
             Block.box(3.5, -1, 5.5, 8.5, 12, 10.5)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape SHAPE_S = Stream.of(
             Block.box(3.9991666666666674, 23.5, 4, 11.999166666666667, 31.5, 12),
@@ -52,7 +50,7 @@ public class StatueRussel extends Block {
             Block.box(11.499166666666667, 11, 5.5, 16.499166666666667, 24, 10.5),
             Block.box(3.4991666666666674, -1, 5.5, 8.499166666666667, 12, 10.5),
             Block.box(7.499166666666667, -1, 5.5, 12.499166666666667, 12, 10.5)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape SHAPE_E = Stream.of(
             Block.box(3.9995833333333337, 23.5, 4.000416666666666, 11.999583333333334, 31.5, 12.000416666666666),
@@ -67,7 +65,7 @@ public class StatueRussel extends Block {
             Block.box(5.499583333333334, 11, -0.4995833333333337, 10.499583333333334, 24, 4.500416666666666),
             Block.box(5.499583333333334, -1, 7.500416666666666, 10.499583333333334, 12, 12.500416666666666),
             Block.box(5.499583333333334, -1, 3.5004166666666663, 10.499583333333334, 12, 8.500416666666666)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape SHAPE_O = Stream.of(
             Block.box(3.9995833333333337, 23.5, 3.9995833333333337, 11.999583333333334, 31.5, 11.999583333333334),
@@ -82,10 +80,10 @@ public class StatueRussel extends Block {
             Block.box(5.499583333333334, 11, 11.499583333333334, 10.499583333333334, 24, 16.499583333333334),
             Block.box(5.499583333333334, -1, 3.4995833333333337, 10.499583333333334, 12, 8.499583333333334),
             Block.box(5.499583333333334, -1, 7.499583333333334, 10.499583333333334, 12, 12.499583333333334)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn_, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)){
             case EAST:
                 return SHAPE_E;
@@ -98,25 +96,25 @@ public class StatueRussel extends Block {
         }
     }
 
-    public StatueRussel() {
-        super(AbstractBlock.Properties.of(Material.STONE));
+    public StatueRussel(BlockBehaviour.Properties properties) {
+        super(properties);
 
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
 
     @Override
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+    public BlockState rotate(BlockState state, Rotation direction) {
         return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
     }

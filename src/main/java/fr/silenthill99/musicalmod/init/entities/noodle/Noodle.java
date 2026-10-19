@@ -1,26 +1,29 @@
 package fr.silenthill99.musicalmod.init.entities.noodle;
 
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NonNull;
 
 import javax.annotation.Nullable;
 
-public class Noodle extends CreatureEntity {
+public class Noodle extends PathfinderMob {
 
-    public Noodle(EntityType<? extends CreatureEntity> type, World worldIn) {
-        super(type, worldIn);
+    public Noodle(net.minecraft.world.entity.EntityType<? extends PathfinderMob> type, Level level) {
+        super(type, level);
     }
 
-    public static AttributeModifierMap.MutableAttribute setAttributes() {
-        return MobEntity.createMobAttributes()
+    public static AttributeSupplier.Builder setAttributes() {
+        return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0f)
                 .add(Attributes.ATTACK_DAMAGE, 5.0f)
                 .add(Attributes.ATTACK_SPEED, 1.4f)
@@ -31,17 +34,16 @@ public class Noodle extends CreatureEntity {
     protected void registerGoals() {
         super.registerGoals();
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false));
-        this.goalSelector.addGoal(2, new RandomWalkingGoal(this, 1));
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(5, new SwimGoal(this));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new FloatGoal(this));
 
     }
 
     @Override
-    protected int getExperienceReward(PlayerEntity p_70693_1_) {
+    protected int getBaseExperienceReward(@NonNull ServerLevel level) {
         return 5;
-
     }
 
     @Nullable

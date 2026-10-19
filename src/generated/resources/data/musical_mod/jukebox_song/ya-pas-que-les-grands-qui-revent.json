@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.musical_mod.ya_pas_que_les_grands_qui_revent.desc"
+  },
+  "length_in_seconds": 231.0,
+  "sound_event": "musical_mod:ya-pas-que-les-grands-qui-revent"
+}

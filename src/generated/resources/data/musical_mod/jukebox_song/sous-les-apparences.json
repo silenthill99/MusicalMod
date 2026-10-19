@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.musical_mod.sous-les-apparences.desc"
+  },
+  "length_in_seconds": 205.0,
+  "sound_event": "musical_mod:sous-les-apparences"
+}

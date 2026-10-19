@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.musical_mod.dirty-harry.desc"
+  },
+  "length_in_seconds": 223.0,
+  "sound_event": "musical_mod:dirty-harry"
+}

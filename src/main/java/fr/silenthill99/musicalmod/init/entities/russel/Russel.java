@@ -1,24 +1,25 @@
 package fr.silenthill99.musicalmod.init.entities.russel;
 
-import net.minecraft.entity.CreatureEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifierMap;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.level.Level;
 
-public class Russel extends CreatureEntity
+public class Russel extends PathfinderMob
 {
 
-    public Russel(EntityType<? extends CreatureEntity> type, World worldIn)
-    {
-        super(type, worldIn);
+    public Russel(net.minecraft.world.entity.EntityType<? extends PathfinderMob> type, Level level) {
+        super(type, level);
     }
 
-    public static AttributeModifierMap.MutableAttribute setAttributes()
+    public static AttributeSupplier.Builder setAttributes()
     {
-        return MobEntity.createMobAttributes()
+        return PathfinderMob.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0f)
                 .add(Attributes.ATTACK_DAMAGE, 5.0f)
                 .add(Attributes.ATTACK_SPEED, 1.4f)
@@ -30,10 +31,10 @@ public class Russel extends CreatureEntity
     {
         super.registerGoals();
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.2, false));
-        this.goalSelector.addGoal(2, new RandomWalkingGoal(this, 1));
+        this.goalSelector.addGoal(2, new RandomStrollGoal(this, 1));
         this.targetSelector.addGoal(3, new HurtByTargetGoal(this));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.goalSelector.addGoal(5, new SwimGoal(this));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(5, new FloatGoal(this));
     }
 
 }

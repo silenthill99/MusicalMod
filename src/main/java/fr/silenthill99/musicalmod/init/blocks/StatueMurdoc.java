@@ -1,23 +1,20 @@
 package fr.silenthill99.musicalmod.init.blocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
@@ -25,7 +22,7 @@ import java.util.stream.Stream;
 @SuppressWarnings("ALL")
 public class StatueMurdoc extends Block {
 
-    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public static final VoxelShape SHAPE_N = Stream.of(
             Block.box(4, 23.5, 4, 12, 31.5, 12),
@@ -40,7 +37,7 @@ public class StatueMurdoc extends Block {
             Block.box(0.5, 11, 5.5, 4.5, 24, 10.5),
             Block.box(7.5, -1, 5.5, 12.5, 12, 10.5),
             Block.box(3.5, -1, 5.5, 8.5, 12, 10.5)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape SHAPE_S = Stream.of(
             Block.box(3.999999999999999, 23.5, 3.998333333333333, 12, 31.5, 11.998333333333335),
@@ -55,7 +52,7 @@ public class StatueMurdoc extends Block {
             Block.box(11.5, 11, 5.498333333333333, 15.5, 24, 10.498333333333335),
             Block.box(3.499999999999999, -1, 5.498333333333333, 8.5, 12, 10.498333333333335),
             Block.box(7.499999999999999, -1, 5.498333333333333, 12.5, 12, 10.498333333333335)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape SHAPE_E = Stream.of(
             Block.box(3.9991666666666665, 23.5, 3.9991666666666656, 11.999166666666667, 31.5, 11.999166666666667),
@@ -70,7 +67,7 @@ public class StatueMurdoc extends Block {
             Block.box(5.4991666666666665, 11, 0.49916666666666565, 10.499166666666667, 24, 4.499166666666666),
             Block.box(5.4991666666666665, -1, 7.499166666666666, 10.499166666666667, 12, 12.499166666666667),
             Block.box(5.4991666666666665, -1, 3.4991666666666656, 10.499166666666667, 12, 8.499166666666667)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     public static final VoxelShape SHAPE_O = Stream.of(
             Block.box(4.000833333333332, 23.5, 3.9991666666666656, 12.000833333333333, 31.5, 11.999166666666667),
@@ -85,10 +82,10 @@ public class StatueMurdoc extends Block {
             Block.box(5.500833333333332, 11, 11.499166666666667, 10.500833333333333, 24, 15.499166666666667),
             Block.box(5.500833333333332, -1, 3.4991666666666656, 10.500833333333333, 12, 8.499166666666667),
             Block.box(5.500833333333332, -1, 7.499166666666666, 10.500833333333333, 12, 12.499166666666667)
-    ).reduce((v1, v2) -> VoxelShapes.join(v1, v2, IBooleanFunction.OR)).get();
+    ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn_, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)){
             case EAST:
                 return SHAPE_E;
@@ -101,8 +98,8 @@ public class StatueMurdoc extends Block {
         }
     }
 
-    public StatueMurdoc() {
-        super(AbstractBlock.Properties.of(Material.STONE));
+    public StatueMurdoc(Properties properties) {
+        super(properties);
 
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH));
     }
@@ -113,18 +110,18 @@ public class StatueMurdoc extends Block {
     }
 
     @Override
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+    public BlockState rotate(BlockState state, Rotation direction) {
         return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
     }

@@ -2,23 +2,27 @@ package fr.silenthill99.musicalmod.init.entities.murdoc;
 
 
 import fr.silenthill99.musicalmod.Main;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
-public class MurdocRenderer extends MobRenderer<Murdoc, MurdocModel<Murdoc>>
+public class MurdocRenderer extends MobRenderer<Murdoc, MurdocRenderState, MurdocModel<MurdocRenderState>>
 {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entities/murdoc.png");
+    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(Main.MOD_ID, "textures/entities/murdoc.png");
 
-    public MurdocRenderer(EntityRendererManager manager)
-    {
-        super(manager, new MurdocModel<>(), 0.7f);
+    public MurdocRenderer(EntityRendererProvider.Context context) {
+        super(context, new MurdocModel<>(context.bakeLayer(MurdocModel.LAYER_LOCATION)), 0.5f);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Murdoc p_110775_1_)
-    {
+    public @NonNull Identifier getTextureLocation(@NonNull MurdocRenderState renderState) {
         return TEXTURE;
+    }
+
+    @Override
+    public @NonNull MurdocRenderState createRenderState() {
+        return new MurdocRenderState();
     }
 }

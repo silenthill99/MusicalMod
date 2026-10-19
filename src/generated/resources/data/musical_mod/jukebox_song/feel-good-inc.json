@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.musical_mod.feel_good_inc.desc"
+  },
+  "length_in_seconds": 221.0,
+  "sound_event": "musical_mod:feel-good-inc"
+}

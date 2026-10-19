@@ -1,23 +1,26 @@
 package fr.silenthill99.musicalmod.init.entities.russel;
 
 import fr.silenthill99.musicalmod.Main;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
-public class RusselRenderer extends MobRenderer<Russel, RusselModel<Russel>>
-{
+public class RusselRenderer extends MobRenderer<Russel, RusselRenderState, RusselModel<RusselRenderState>> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Main.MOD_ID, "textures/entities/russel.png");
+    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(Main.MOD_ID, "textures/entities/russel.png");
 
-    public RusselRenderer(EntityRendererManager manager)
-    {
-        super(manager, new RusselModel<>(), 0.7f);
+    public RusselRenderer(EntityRendererProvider.Context context) {
+        super(context, new RusselModel<>(context.bakeLayer(RusselModel.LAYER_LOCATION)), 0.7f);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Russel p_110775_1_)
-    {
+    public @NonNull Identifier getTextureLocation(@NonNull RusselRenderState renderState) {
         return TEXTURE;
+    }
+
+    @Override
+    public @NonNull RusselRenderState createRenderState() {
+        return new RusselRenderState();
     }
 }
